@@ -9,8 +9,8 @@ select
           f.FactID as ID
           ,d.DistrID as DistrID
           ,db.DistrName as PARTNER_DEPARTMENT
-		  ,year(d.DocDate) as [Ãîä]
-		  ,month(d.DocDate) as [Ìåñÿö]
+		  ,year(d.DocDate) as [year]
+		  ,month(d.DocDate) as [month]
           ,d.DocDate as REPORTING_DATE
           ,d.ClientID
           ,f.CISLink_DateCreated as CREATION_DATE
@@ -47,14 +47,14 @@ select
 select
        [DistrID] -- äîáàâèë
        ,[PARTNER_DEPARTMENT]
-	   ,[Ãîä]
+	   ,[year]
 	   ,[Ìåñÿö]
-       ,replace(sum([TOTAL_COUNT]), '.', ',') as [Êîë-âî_åä_èçì_IEK_TOTAL_COUNT]
-	   ,replace(sum(Amount), '.', ',') as [Îòãðóçî÷íàÿ_ñòîèìîñòü_òîâàðà_Amount]
-	   ,replace(sum(Amount2), '.', ',') as [v2_Îòãðóçî÷íàÿ_ñòîèìîñòü_òîâàðà_Amount]
-          ,replace(sum(vf_Amount), '.', ',') as [vf_ÑóììàÎòãðóçêè_Amount]
-          ,replace(sum(vf_AmountBPP_RuR), '.', ',') as [vf_Ñóììà çàêóïêè_AmountBPP_RuR.]
-		  ,replace(sum([Quantity_Price]), '.', ',') as [Ñóììà çàêóïêè_Quantity*Price]
+       ,replace(sum([TOTAL_COUNT]), '.', ',') as [IEK_TOTAL_COUNT]
+	   ,replace(sum(Amount), '.', ',') as [_Amount]
+	   ,replace(sum(Amount2), '.', ',') as [v2_Amount]
+          ,replace(sum(vf_Amount), '.', ',') as [vf_Amount]
+          ,replace(sum(vf_AmountBPP_RuR), '.', ',') as [vf_AmountBPP_RuR.]
+		  ,replace(sum([Quantity_Price]), '.', ',') as [_Quantity*Price]
 from
        cte
 where 
@@ -63,11 +63,11 @@ where
 group by
        [DistrID]
        ,[PARTNER_DEPARTMENT]
-	   ,[Ãîä]
-	   ,[Ìåñÿö]
+       ,[year]
+       ,[month]
 order by
-       [Ãîä]
-	   ,[Ìåñÿö]
+       [year]
+      ,[month]
 
 -- Предыддущий вариант отчёта
 declare @DateFrom datetime = convert(datetime,'2019-01-01',111)
@@ -79,8 +79,8 @@ with cte as
           f.FactID as ID
           ,d.DistrID as DistrID
           ,db.DistrName as PARTNER_DEPARTMENT
-		  ,year(d.DocDate) as [Ãîä]
-		  ,month(d.DocDate) as [Ìåñÿö]
+		  ,year(d.DocDate) as [year]
+		  ,month(d.DocDate) as [month]
          ,d.DocDate as REPORTING_DATE
                ,d.ClientID
           ,f.CISLink_DateCreated as CREATION_DATE
@@ -113,13 +113,13 @@ with cte as
 select
        [DistrID] -- äîáàâèë
        ,[PARTNER_DEPARTMENT]
-	   ,[Ãîä]
-	   ,[Ìåñÿö]
+       ,[year]
+       ,[month]
        ,replace(sum(TOTAL_COUNT), '.', ',') as TOTAL_COUNT
        ,sum(TOTAL_VALUE) as TOTAL_VALUE
-       ,replace(sum(Amount), '.', ',') as [Îòãðóçî÷íàÿ_ñòîèìîñòü_òîâàðà_Amount]
-       ,replace(sum(vf_Amount), '.', ',') as [vf_ÑóììàÎòãðóçêè_Amount]
-       ,replace(sum(vf_AmountBPP_RuR), '.', ',') as [vf_Ñóììà çàêóïêè_AmountBPP_RuR.]
+       ,replace(sum(Amount), '.', ',') as [_Amount]
+       ,replace(sum(vf_Amount), '.', ',') as [vf__Amount]
+       ,replace(sum(vf_AmountBPP_RuR), '.', ',') as [vf_AmountBPP_RuR.]
 
 from
        cte
@@ -128,10 +128,10 @@ where
 group by
        [DistrID]
        ,[PARTNER_DEPARTMENT]
-	   ,[Ãîä]
-	   ,[Ìåñÿö]
+       ,[year]
+       ,[month]
 
 order by
-       [Ãîä]
-	   ,[Ìåñÿö]
+       [year]
+      ,[month]
 
