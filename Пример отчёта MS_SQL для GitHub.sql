@@ -1,5 +1,5 @@
 
--- ðàáî÷èé âàðèàíò îò÷¸òà
+-- ÐžÑ‚Ñ‡Ñ‘Ñ‚ Ð¿Ð¾ Ð¿Ñ€Ð¾Ð´Ð°Ð¶Ð°Ð¼
 declare @DateFrom datetime = convert(datetime,'2020-01-01',111)
 declare @DateTo datetime = convert(datetime,'2021-12-31',111)
 declare @distrID int = '20199';
@@ -9,8 +9,8 @@ select
           f.FactID as ID
           ,d.DistrID as DistrID
           ,db.DistrName as PARTNER_DEPARTMENT
-		  ,year(d.DocDate) as [Ãîä]
-		  ,month(d.DocDate) as [Ìåñÿö]
+		  ,year(d.DocDate) as [ÃƒÃ®Ã¤]
+		  ,month(d.DocDate) as [ÃŒÃ¥Ã±Ã¿Ã¶]
           ,d.DocDate as REPORTING_DATE
           ,d.ClientID
           ,f.CISLink_DateCreated as CREATION_DATE
@@ -45,16 +45,16 @@ select
        and d.DocDate >= @DateFrom  and d.DocDate < @DateTo
 	   ) 
 select
-       [DistrID] -- äîáàâèë
+       [DistrID] -- Ã¤Ã®Ã¡Ã Ã¢Ã¨Ã«
        ,[PARTNER_DEPARTMENT]
-	   ,[Ãîä]
-	   ,[Ìåñÿö]
-       ,replace(sum([TOTAL_COUNT]), '.', ',') as [Êîë-âî_åä_èçì_IEK_TOTAL_COUNT]
-	   ,replace(sum(Amount), '.', ',') as [Îòãðóçî÷íàÿ_ñòîèìîñòü_òîâàðà_Amount]
-	   ,replace(sum(Amount2), '.', ',') as [v2_Îòãðóçî÷íàÿ_ñòîèìîñòü_òîâàðà_Amount]
-          ,replace(sum(vf_Amount), '.', ',') as [vf_ÑóììàÎòãðóçêè_Amount]
-          ,replace(sum(vf_AmountBPP_RuR), '.', ',') as [vf_Ñóììà çàêóïêè_AmountBPP_RuR.]
-		  ,replace(sum([Quantity_Price]), '.', ',') as [Ñóììà çàêóïêè_Quantity*Price]
+	   ,[ÃƒÃ®Ã¤]
+	   ,[ÃŒÃ¥Ã±Ã¿Ã¶]
+       ,replace(sum([TOTAL_COUNT]), '.', ',') as [ÃŠÃ®Ã«-Ã¢Ã®_Ã¥Ã¤_Ã¨Ã§Ã¬_IEK_TOTAL_COUNT]
+	   ,replace(sum(Amount), '.', ',') as [ÃŽÃ²Ã£Ã°Ã³Ã§Ã®Ã·Ã­Ã Ã¿_Ã±Ã²Ã®Ã¨Ã¬Ã®Ã±Ã²Ã¼_Ã²Ã®Ã¢Ã Ã°Ã _Amount]
+	   ,replace(sum(Amount2), '.', ',') as [v2_ÃŽÃ²Ã£Ã°Ã³Ã§Ã®Ã·Ã­Ã Ã¿_Ã±Ã²Ã®Ã¨Ã¬Ã®Ã±Ã²Ã¼_Ã²Ã®Ã¢Ã Ã°Ã _Amount]
+          ,replace(sum(vf_Amount), '.', ',') as [vf_Ã‘Ã³Ã¬Ã¬Ã ÃŽÃ²Ã£Ã°Ã³Ã§ÃªÃ¨_Amount]
+          ,replace(sum(vf_AmountBPP_RuR), '.', ',') as [vf_Ã‘Ã³Ã¬Ã¬Ã  Ã§Ã ÃªÃ³Ã¯ÃªÃ¨_AmountBPP_RuR.]
+		  ,replace(sum([Quantity_Price]), '.', ',') as [Ã‘Ã³Ã¬Ã¬Ã  Ã§Ã ÃªÃ³Ã¯ÃªÃ¨_Quantity*Price]
 from
        cte
 where 
@@ -63,13 +63,13 @@ where
 group by
        [DistrID]
        ,[PARTNER_DEPARTMENT]
-	   ,[Ãîä]
-	   ,[Ìåñÿö]
+	   ,[ÃƒÃ®Ã¤]
+	   ,[ÃŒÃ¥Ã±Ã¿Ã¶]
 order by
-       [Ãîä]
-	   ,[Ìåñÿö]
+       [ÃƒÃ®Ã¤]
+	   ,[ÃŒÃ¥Ã±Ã¿Ã¶]
 
--- ïðåäûäóùèé âàðèàíò îò÷¸òà
+-- ÐŸÑ€ÐµÐ´Ñ‹Ð´Ð´ÑƒÑ‰Ð¸Ð¹ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚ Ð¾Ñ‚Ñ‡Ñ‘Ñ‚Ð°
 declare @DateFrom datetime = convert(datetime,'2019-01-01',111)
 declare @DateTo datetime = convert(datetime,'2022-02-28',111)
 declare @distrID int = '20210';
@@ -79,8 +79,8 @@ with cte as
           f.FactID as ID
           ,d.DistrID as DistrID
           ,db.DistrName as PARTNER_DEPARTMENT
-		  ,year(d.DocDate) as [Ãîä]
-		  ,month(d.DocDate) as [Ìåñÿö]
+		  ,year(d.DocDate) as [ÃƒÃ®Ã¤]
+		  ,month(d.DocDate) as [ÃŒÃ¥Ã±Ã¿Ã¶]
          ,d.DocDate as REPORTING_DATE
                ,d.ClientID
           ,f.CISLink_DateCreated as CREATION_DATE
@@ -111,15 +111,15 @@ with cte as
    where d.OperType in (0,1) 
        and d.DocDate >= @DateFrom  and d.DocDate < @DateTo) 
 select
-       [DistrID] -- äîáàâèë
+       [DistrID] -- Ã¤Ã®Ã¡Ã Ã¢Ã¨Ã«
        ,[PARTNER_DEPARTMENT]
-	   ,[Ãîä]
-	   ,[Ìåñÿö]
+	   ,[ÃƒÃ®Ã¤]
+	   ,[ÃŒÃ¥Ã±Ã¿Ã¶]
        ,replace(sum(TOTAL_COUNT), '.', ',') as TOTAL_COUNT
        ,sum(TOTAL_VALUE) as TOTAL_VALUE
-       ,replace(sum(Amount), '.', ',') as [Îòãðóçî÷íàÿ_ñòîèìîñòü_òîâàðà_Amount]
-       ,replace(sum(vf_Amount), '.', ',') as [vf_ÑóììàÎòãðóçêè_Amount]
-       ,replace(sum(vf_AmountBPP_RuR), '.', ',') as [vf_Ñóììà çàêóïêè_AmountBPP_RuR.]
+       ,replace(sum(Amount), '.', ',') as [ÃŽÃ²Ã£Ã°Ã³Ã§Ã®Ã·Ã­Ã Ã¿_Ã±Ã²Ã®Ã¨Ã¬Ã®Ã±Ã²Ã¼_Ã²Ã®Ã¢Ã Ã°Ã _Amount]
+       ,replace(sum(vf_Amount), '.', ',') as [vf_Ã‘Ã³Ã¬Ã¬Ã ÃŽÃ²Ã£Ã°Ã³Ã§ÃªÃ¨_Amount]
+       ,replace(sum(vf_AmountBPP_RuR), '.', ',') as [vf_Ã‘Ã³Ã¬Ã¬Ã  Ã§Ã ÃªÃ³Ã¯ÃªÃ¨_AmountBPP_RuR.]
 
 from
        cte
@@ -128,10 +128,10 @@ where
 group by
        [DistrID]
        ,[PARTNER_DEPARTMENT]
-	   ,[Ãîä]
-	   ,[Ìåñÿö]
+	   ,[ÃƒÃ®Ã¤]
+	   ,[ÃŒÃ¥Ã±Ã¿Ã¶]
 
 order by
-       [Ãîä]
-	   ,[Ìåñÿö]
+       [ÃƒÃ®Ã¤]
+	   ,[ÃŒÃ¥Ã±Ã¿Ã¶]
 
